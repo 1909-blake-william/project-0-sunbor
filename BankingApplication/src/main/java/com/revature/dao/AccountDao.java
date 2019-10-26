@@ -23,10 +23,10 @@ public interface AccountDao {
 	List<Account> viewOwned();
 	
 	//deposit
-	void deposit(double amount);
+	int deposit(int id, double amount);
 	
 	//withdraw
-	void withdraw(double amount);
+	int withdraw(int id, double amount);
 		
 	//ADMIN ONLY!!!!!
 

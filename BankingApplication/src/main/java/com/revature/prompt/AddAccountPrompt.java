@@ -3,7 +3,6 @@ package com.revature.prompt;
 import java.util.Scanner;
 
 import com.revature.dao.AccountDao;
-import com.revature.dao.UserDao;
 import com.revature.model.Account;
 import com.revature.util.AuthUtil;
 import com.revature.util.Constants;
@@ -11,7 +10,6 @@ import com.revature.util.Constants;
 public class AddAccountPrompt implements Prompt {
 
 	private Scanner scan = new Scanner(System.in);
-	private UserDao userDao = UserDao.currentImplementation;
 	private AccountDao accountDao = AccountDao.currentImplementation;
 	private AuthUtil auth = AuthUtil.instance;
 	
@@ -30,6 +28,7 @@ public class AddAccountPrompt implements Prompt {
 		double startingBalance = 0;
 		if(scan.hasNextDouble()) {
 			startingBalance = scan.nextDouble();
+			scan.nextLine();
 		}
 		else {
 			System.out.println("enter a number");

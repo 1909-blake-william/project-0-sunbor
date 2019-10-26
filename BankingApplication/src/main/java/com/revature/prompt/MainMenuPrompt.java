@@ -1,11 +1,14 @@
 package com.revature.prompt;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import com.revature.dao.AccountDao;
+import com.revature.dao.TransactionDao;
 import com.revature.dao.UserDao;
 import com.revature.model.Account;
+import com.revature.model.Transaction;
 import com.revature.model.User;
 import com.revature.util.AuthUtil;
 
@@ -14,6 +17,7 @@ public class MainMenuPrompt implements Prompt {
 	private Scanner scan = new Scanner(System.in);
 	private UserDao userDao = UserDao.currentImplementation;
 	private AccountDao accountDao = AccountDao.currentImplementation;
+	private TransactionDao transactionDao = TransactionDao.currentImplementation;
 	private AuthUtil auth = AuthUtil.instance;
 	
 	public Prompt run() {
@@ -32,7 +36,6 @@ public class MainMenuPrompt implements Prompt {
 		//super secret methods!!!!!!
 		//8 to view all users
 		//9 to view all accounts
-		//10 to delete account
 		
 		System.out.println("Press 1 to add account");
 		System.out.println("Press 2 to remove account");
@@ -46,7 +49,7 @@ public class MainMenuPrompt implements Prompt {
 			System.out.println("super secret admin privileges");
 			System.out.println("Press 8 to view all users");
 			System.out.println("Press 9 to view all accounts");
-			System.out.println("Press 10 to delete user");
+			System.out.println("Press 10 to view all transactions");
 		}
 		
 		//get user input
@@ -57,28 +60,35 @@ public class MainMenuPrompt implements Prompt {
 			return new AddAccountPrompt();
 		case "2":
 			//remove account
-			System.out.println("not implemented");
-			break;
+			//new prompt
+			return new CloseAccountPrompt();
 		case "3":
 			//view accounts
-			System.out.println("not implemented");
+			List<Account> accountList1 = accountDao.viewOwned();
+			for(Account a : accountList1) {
+				System.out.println(a);
+			}
 			break;
 		case "4":
 			//make deposit
-			System.out.println("not implemented");
-			break;
+			//new prompt
+			return new DepositPrompt();
 		case "5":
 			//make withdrawal
-			System.out.println("not implemented");
-			break;
+			//new prompt
+			return new WithdrawPrompt();
 		case "6":
 			//view transaction history
-			System.out.println("not implemented");
+			List<Transaction> transList1 = transactionDao.viewOwn();
+			for(Transaction t : transList1) {
+				System.out.println(t);
+			}
 			break;
 		case "7":
 			//logout
 			System.out.println("not implemented");
-			break;
+			auth.logout();
+			return new LoginPrompt();
 		case "8":
 			//view all users
 			//only if admin
@@ -96,8 +106,8 @@ public class MainMenuPrompt implements Prompt {
 			//view all accounts	
 			//only if admin
 			if(userRole.equals("admin")) {
-				List<Account> accountList = accountDao.viewAll();
-				for(Account a: accountList) {
+				List<Account> accountList2 = accountDao.viewAll();
+				for(Account a: accountList2) {
 					System.out.println(a);
 				}
 			}
@@ -106,8 +116,17 @@ public class MainMenuPrompt implements Prompt {
 			}
 			break;
 		case "10":
-			//delete user
-			System.out.println("not implemented");
+			//view all transactions
+			//only if admin
+			if(userRole.equals("admin")) {
+				List<Transaction> transList2 = transactionDao.viewAll();
+				for(Transaction t: transList2) {
+					System.out.println(t);
+				}
+			}
+			else {
+				System.out.println("stay out!");
+			}
 			break;
 		default:
 			System.out.println("enter a valid option");

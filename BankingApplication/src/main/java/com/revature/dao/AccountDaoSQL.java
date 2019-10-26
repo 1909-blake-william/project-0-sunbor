@@ -25,11 +25,31 @@ public class AccountDaoSQL implements AccountDao {
 		User owner = userDao.findById(ownerId);
 		double balance = rs.getFloat("balance");
 		boolean opened = rs.getInt("opened") == 0 ? false : true;
-		
-		//TODO add to transaction history
-		
+				
 		//return new account object
 		return new Account(id, accountName, owner, balance, opened);
+	}
+	
+	public boolean validateAccount(int id) {
+		//validate selection
+		try(Connection c = ConnectionUtil.getConnection()){
+			//check that account belongs to user and is not closed
+			String sql1 = "SELECT * FROM bank_accounts WHERE account_id = ? AND owner_id = ? AND opened = 1";
+			PreparedStatement ps1 = c.prepareStatement(sql1);
+			ps1.setInt(1, id);
+			ps1.setInt(2, auth.getCurrentUser().getId());
+			ResultSet rs1 = ps1.executeQuery();
+			if(rs1.next()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	@Override
@@ -53,16 +73,22 @@ public class AccountDaoSQL implements AccountDao {
 
 	@Override
 	public int remove(int id) {
-		//TODO add edge cases (already closed, account not found, doesnt own account)
+		//TODO add edge cases (account not found, maybe add in prompt)
 		//close not delete
+		//validate selection
+		if(!validateAccount(id)) {
+			System.out.println("invalid account");
+			return 0;
+		}
 		//just change the boolean
 		try(Connection c = ConnectionUtil.getConnection()){
+			//perform update
 			String sql = "UPDATE bank_accounts SET opened = 0 WHERE account_id = ?";
 			PreparedStatement ps = c.prepareStatement(sql);
 			ps.setInt(1, id);
 			
+			//returns 0 if failed for whatever reason
 			return ps.executeUpdate();
-
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -116,27 +142,96 @@ public class AccountDaoSQL implements AccountDao {
 	}
 
 	@Override
-	public void deposit(double amount) {
+	public int deposit(int id, double amount) {
 		//prevent user from accessing unowned account
 		//prevent user from accessing closed account
-		//get original balance
-		//modify balance
-		//update
-		//add to transaction history
+		if(!validateAccount(id)) {
+			System.out.println("invalid account");
+			return 0;
+		}
+		if(amount < 0) {
+			System.out.println("enter a valid amount");
+			return 0;
+		}
 		try(Connection c = ConnectionUtil.getConnection()){
-			//get account id
+			//get original balance
+			//modify balance
+			//update
+			//add to transaction history
+			String sql = "SELECT balance FROM bank_accounts WHERE account_id = ?";
+			PreparedStatement ps = c.prepareStatement(sql);
+			ps.setInt(1, id);
+			
+			double balance = 0;
+			ResultSet rs = ps.executeQuery();
+			//should get the only square
+			if(rs.next()) {
+				balance = rs.getDouble(1);
+			}
+			
+			//change value
+			balance += amount;
+			
+			//update
+			sql = "UPDATE bank_accounts SET balance = ? WHERE account_id = ?";
+			ps = c.prepareStatement(sql);
+			ps.setDouble(1, balance);
+			ps.setInt(2, id);
+			
+			return ps.executeUpdate();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
 	@Override
-	public void withdraw(double amount) {
+	public int withdraw(int id, double amount) {
+		//prevent user from accessing unowned account
+		//prevent user from accessing closed account
+		//prevent negative numbers
+		if(!validateAccount(id)) {
+			System.out.println("invalid account");
+			return 0;
+		}
+		if(amount < 0) {
+			System.out.println("enter a valid amount");
+			return 0;
+		}
+		try(Connection c = ConnectionUtil.getConnection()){
+			//get original balance
+			//modify balance
+			//update
+			//add to transaction history
+			String sql = "SELECT balance FROM bank_accounts WHERE account_id = ?";
+			PreparedStatement ps = c.prepareStatement(sql);
+			ps.setInt(1, id);
+			
+			double balance = 0;
+			ResultSet rs = ps.executeQuery();
+			//should get the only square
+			if(rs.next()) {
+				balance = rs.getDouble(1);
+			}
+			
+			//change value
+			balance -= amount;
+			
+			//update
+			sql = "UPDATE bank_accounts SET balance = ? WHERE account_id = ?";
+			ps = c.prepareStatement(sql);
+			ps.setDouble(1, balance);
+			ps.setInt(2, id);
+			
+			return ps.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 
 public class ConnectionUtil {
-	private static Logger log = Logger.getRootLogger();
+	//private static Logger log = Logger.getRootLogger();
 	
 	public static Connection getConnection() throws SQLException {
 		String url = System.getenv("POKEMON_DB_URL");

@@ -1,6 +1,5 @@
 package com.revature.prompt;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,9 +35,10 @@ public class MainMenuPrompt implements Prompt {
 		//super secret methods!!!!!!
 		//8 to view all users
 		//9 to view all accounts
+		//10 to view all transactions
 		
 		System.out.println("Press 1 to add account");
-		System.out.println("Press 2 to remove account");
+		System.out.println("Press 2 to close account");
 		System.out.println("Press 3 to view accounts");
 		System.out.println("Press 4 to make a deposit");
 		System.out.println("Press 5 to make a withdrawal");
@@ -65,6 +65,9 @@ public class MainMenuPrompt implements Prompt {
 		case "3":
 			//view accounts
 			List<Account> accountList1 = accountDao.viewOwned();
+			if(accountList1.size() == 0) {
+				System.out.println("no accounts found");
+			}
 			for(Account a : accountList1) {
 				System.out.println(a);
 			}
@@ -80,6 +83,9 @@ public class MainMenuPrompt implements Prompt {
 		case "6":
 			//view transaction history
 			List<Transaction> transList1 = transactionDao.viewOwn();
+			if(transList1.size() == 0) {
+				System.out.println("no transactions found");
+			}
 			for(Transaction t : transList1) {
 				System.out.println(t);
 			}
@@ -107,6 +113,9 @@ public class MainMenuPrompt implements Prompt {
 			//only if admin
 			if(userRole.equals("admin")) {
 				List<Account> accountList2 = accountDao.viewAll();
+				if(accountList2.size() == 0) {
+					System.out.println("no accounts found");
+				}
 				for(Account a: accountList2) {
 					System.out.println(a);
 				}
@@ -120,6 +129,9 @@ public class MainMenuPrompt implements Prompt {
 			//only if admin
 			if(userRole.equals("admin")) {
 				List<Transaction> transList2 = transactionDao.viewAll();
+				if(transList2.size() == 0) {
+					System.out.println("no transactions found");
+				}
 				for(Transaction t: transList2) {
 					System.out.println(t);
 				}

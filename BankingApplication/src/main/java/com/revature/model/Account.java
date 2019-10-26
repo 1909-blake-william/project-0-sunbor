@@ -1,7 +1,6 @@
 package com.revature.model;
 
 import java.io.Serializable;
-import java.util.Map;
 
 public class Account implements Serializable {
 	private int id;

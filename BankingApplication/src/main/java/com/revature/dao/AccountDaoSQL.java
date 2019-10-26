@@ -73,7 +73,6 @@ public class AccountDaoSQL implements AccountDao {
 
 	@Override
 	public int remove(int id) {
-		//TODO add edge cases (account not found, maybe add in prompt)
 		//close not delete
 		//validate selection
 		if(!validateAccount(id)) {

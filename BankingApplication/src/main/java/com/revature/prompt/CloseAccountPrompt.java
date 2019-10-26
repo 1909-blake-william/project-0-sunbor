@@ -11,11 +11,12 @@ public class CloseAccountPrompt implements Prompt {
 	
 	@Override
 	public Prompt run() {
-		//TODO maybe show owned accounts
+		//show owned accounts
 		//get id of account to close
 		//make sure user input is integer
 		//call close account
 		System.out.println("enter id of account to close");
+		accountDao.viewOwned();
 		int id = 0;
 		if(scan.hasNextInt()) {
 			id = scan.nextInt();

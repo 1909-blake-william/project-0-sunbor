@@ -13,13 +13,14 @@ public class WithdrawPrompt implements Prompt {
 	
 	@Override
 	public Prompt run() {
-		//TODO possibly display owned accounts
+		//display owned accounts
 		//get id of account to withdraw from
 		//get amount to withdraw
 		//check if id and amount are valid numbers
 		//call deposit method
 
-		System.out.println("input id of account to withdraw");
+		System.out.println("input id of account to withdraw from");
+		accountDao.viewOwned();
 		int id = 0;
 		if(scan.hasNextInt()) {
 			id = scan.nextInt();

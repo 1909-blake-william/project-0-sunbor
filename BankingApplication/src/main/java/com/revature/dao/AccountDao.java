@@ -1,10 +1,8 @@
 package com.revature.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import com.revature.model.Account;
-import com.revature.model.User;
 
 public interface AccountDao {
 	

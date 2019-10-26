@@ -76,7 +76,7 @@ public class TransactionDaoSQL implements TransactionDao {
 			String sql = "SELECT * FROM bank_transactions t "
 					+ "LEFT JOIN bank_accounts a "
 					+ "ON (t.account_id = a.account_id) "
-					+ "WHERE t.account_id = ? "
+					+ "WHERE a.owner_id = ? "
 					+ "ORDER BY time_date";
 			PreparedStatement ps = c.prepareStatement(sql);
 			ps.setInt(1, auth.getCurrentUser().getId());

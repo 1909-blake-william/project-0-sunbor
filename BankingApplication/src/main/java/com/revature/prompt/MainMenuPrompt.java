@@ -86,7 +86,7 @@ public class MainMenuPrompt implements Prompt {
 			break;
 		case "7":
 			//logout
-			System.out.println("not implemented");
+			System.out.println("logging out");
 			auth.logout();
 			return new LoginPrompt();
 		case "8":

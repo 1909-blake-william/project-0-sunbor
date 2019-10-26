@@ -38,7 +38,8 @@ public class AddAccountPrompt implements Prompt {
 		Account newAccount = new Account(1, accountName, auth.getCurrentUser(), startingBalance, true);
 		//add new account object to dao
 		accountDao.add(newAccount);
-		// TODO Auto-generated method stub
+		//TODO maybe add starting balance to transaction history
+
 		return new MainMenuPrompt();
 	}
 

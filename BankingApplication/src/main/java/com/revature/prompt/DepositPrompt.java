@@ -3,11 +3,13 @@ package com.revature.prompt;
 import java.util.Scanner;
 
 import com.revature.dao.AccountDao;
+import com.revature.dao.TransactionDao;
 
 public class DepositPrompt implements Prompt {
 
 	private Scanner scan = new Scanner(System.in);
 	private AccountDao accountDao = AccountDao.currentImplementation;
+	private TransactionDao transactionDao = TransactionDao.currentImplementation;
 	
 	@Override
 	public Prompt run() {
@@ -16,6 +18,7 @@ public class DepositPrompt implements Prompt {
 		//get amount to deposit
 		//check if id and amount are valid numbers
 		//call deposit method
+		//update transaction history
 
 		System.out.println("input id of account to deposit in");
 		int id = 0;
@@ -42,6 +45,7 @@ public class DepositPrompt implements Prompt {
 		int numUpdated = accountDao.deposit(id, amount);
 		if(numUpdated != 0) {
 			System.out.println("deposited " + amount + " into " + accountDao.viewOne(id).getAccountName());
+			transactionDao.addTransaction(id, amount);
 		}
 		else {
 			System.out.println("deposit failed");

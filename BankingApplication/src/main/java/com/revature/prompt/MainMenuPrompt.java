@@ -37,19 +37,19 @@ public class MainMenuPrompt implements Prompt {
 		//9 to view all accounts
 		//10 to view all transactions
 		
-		System.out.println("Press 1 to add account");
-		System.out.println("Press 2 to close account");
-		System.out.println("Press 3 to view accounts");
-		System.out.println("Press 4 to make a deposit");
-		System.out.println("Press 5 to make a withdrawal");
-		System.out.println("Press 6 to view transaction history");
-		System.out.println("Press 7 to logout");
+		System.out.println("Press 1 to commit a crime");
+		System.out.println("Press 2 to get pardoned");
+		System.out.println("Press 3 to view your crimal record");
+		System.out.println("Press 4 to perform bad behavior");
+		System.out.println("Press 5 to perform good behavior");
+		System.out.println("Press 6 to view your behavior records");
+		System.out.println("Press 7 to escape");
 		
 		if(userRole.equals("admin")) {
-			System.out.println("super secret admin privileges");
-			System.out.println("Press 8 to view all users");
-			System.out.println("Press 9 to view all accounts");
-			System.out.println("Press 10 to view all transactions");
+			System.out.println("Super secret warden privileges");
+			System.out.println("Press 8 to view all inmates");
+			System.out.println("Press 9 to view all criminal records");
+			System.out.println("Press 10 to view all prison behavior records");
 		}
 		
 		//get user input
@@ -66,7 +66,7 @@ public class MainMenuPrompt implements Prompt {
 			//view accounts
 			List<Account> accountList1 = accountDao.viewOwned();
 			if(accountList1.size() == 0) {
-				System.out.println("no accounts found");
+				System.out.println("No crimes committed");
 			}
 			for(Account a : accountList1) {
 				System.out.println(a);
@@ -84,7 +84,7 @@ public class MainMenuPrompt implements Prompt {
 			//view transaction history
 			List<Transaction> transList1 = transactionDao.viewOwn();
 			if(transList1.size() == 0) {
-				System.out.println("no transactions found");
+				System.out.println("No prison behavior found");
 			}
 			for(Transaction t : transList1) {
 				System.out.println(t);
@@ -92,7 +92,7 @@ public class MainMenuPrompt implements Prompt {
 			break;
 		case "7":
 			//logout
-			System.out.println("logging out");
+			System.out.println("You grab a bundle of balloons and float over the wall");
 			auth.logout();
 			return new LoginPrompt();
 		case "8":
@@ -105,7 +105,7 @@ public class MainMenuPrompt implements Prompt {
 				}
 			}
 			else {
-				System.out.println("stay out!");
+				System.out.println("You don't have a circus ticket");
 			}
 			break;
 		case "9":
@@ -114,14 +114,14 @@ public class MainMenuPrompt implements Prompt {
 			if(userRole.equals("admin")) {
 				List<Account> accountList2 = accountDao.viewAll();
 				if(accountList2.size() == 0) {
-					System.out.println("no accounts found");
+					System.out.println("No crimes committed");
 				}
 				for(Account a: accountList2) {
 					System.out.println(a);
 				}
 			}
 			else {
-				System.out.println("stay out!");
+				System.out.println("You don't have a circus ticket");
 			}
 			break;
 		case "10":
@@ -130,21 +130,20 @@ public class MainMenuPrompt implements Prompt {
 			if(userRole.equals("admin")) {
 				List<Transaction> transList2 = transactionDao.viewAll();
 				if(transList2.size() == 0) {
-					System.out.println("no transactions found");
+					System.out.println("No prison behavior found");
 				}
 				for(Transaction t: transList2) {
 					System.out.println(t);
 				}
 			}
 			else {
-				System.out.println("stay out!");
+				System.out.println("You don't have a circus ticket");
 			}
 			break;
 		default:
-			System.out.println("enter a valid option");
+			System.out.println("That's not the number I'm thinking of");
 			break;
 		}
-		// TODO Auto-generated method stub
 		return new MainMenuPrompt();
 	}
 

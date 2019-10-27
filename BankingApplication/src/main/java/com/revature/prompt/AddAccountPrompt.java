@@ -16,22 +16,22 @@ public class AddAccountPrompt implements Prompt {
 	@Override
 	public Prompt run() {
 		//get account name
-		System.out.println("enter account name");
+		System.out.println("What are you in for?");
 		String accountName = scan.nextLine();
 		//check if too long
 		if(accountName.length() > Constants.maxTextLength) {
-			System.out.println("account name too long");
+			System.out.println("Sorry, I stopped paying attention");
 			return new MainMenuPrompt();
 		}
 		//get starting balance
-		System.out.println("enter starting balance");
+		System.out.println("Enter your sentence in months");
 		double startingBalance = 0;
 		if(scan.hasNextDouble()) {
 			startingBalance = scan.nextDouble();
 			scan.nextLine();
 		}
 		else {
-			System.out.println("enter a number");
+			System.out.println("Enter a valid number");
 			return new MainMenuPrompt();
 		}
 		//make account object

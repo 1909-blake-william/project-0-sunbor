@@ -16,8 +16,8 @@ public class LoginPrompt implements Prompt{
 		
 		//give prompt
 		//save choice
-		System.out.println("Enter 1 to login");
-		System.out.println("Enter 2 to register");
+		System.out.println("Enter 1 to get locked up");
+		System.out.println("Enter 2 to register as a criminal clown");
 		String choice = scan.nextLine();
 		
 		//enter 1 to login
@@ -25,9 +25,9 @@ public class LoginPrompt implements Prompt{
 		switch(choice) {
 		case "1":{
 			//get username and password
-			System.out.println("Input username");
+			System.out.println("Enter your name");
 			String username = scan.nextLine();
-			System.out.println("input password");
+			System.out.println("Enter your password");
 			String password = scan.nextLine();
 			
 			//find user with the username and password
@@ -36,7 +36,7 @@ public class LoginPrompt implements Prompt{
 			//if correct, go to main menu
 			//if incorrect, to back to login
 			if(u == null) {
-				System.out.println("incorrect username or password");
+				System.out.println("Incorrect name or password");
 				break;
 			}
 			else {

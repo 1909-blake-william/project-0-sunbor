@@ -91,8 +91,8 @@ public class Account implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", accountName=" + accountName + ", owner=" + owner + ", balance=" + balance
-				+ ", opened=" + opened + "]";
+		return "Crime [id: " + id + ", Crime name: " + accountName + ", Inmate: " + owner.getUsername() + ", Remaining sentence: " + balance
+				+ " months, Pardoned: " + !opened + "]";
 	}
 
 }

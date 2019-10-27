@@ -14,42 +14,44 @@ public class RegisterPrompt implements Prompt {
 	@Override
 	public Prompt run() {
 		//get username from user
-		System.out.println("Input new username");
+		System.out.println("Enter your new clown name");
 		String newName = scan.nextLine();
 		//check to see that size is not over limit
 		if(newName.length() > Constants.maxTextLength) {
-			System.out.println("get a nickname");
+			System.out.println("Get a nickname");
 			return new LoginPrompt();
 		}
 		
 		//check if username is already taken
 		if(userDao.findByUsername(newName) != null) {
 			//berate user and go back to menu
-			System.out.println("be more creative");
+			System.out.println("Be more creative");
 			return new LoginPrompt();
 		}
 		
 		//get password
-		System.out.println("input new password"); 
+		System.out.println("Enter new password"); 
 		String newPass = scan.nextLine();
 		if(newPass.length() > Constants.maxTextLength) {
-			System.out.println("no need to be so paranoid");
+			System.out.println("No need to be so paranoid");
 			return new LoginPrompt();
 		}
 		
 		//ask if admin
-		System.out.println("are you an admin? (y/n) dont lie!!!!");
+		System.out.println("Is your refrigerator running? (y/n)");
 		String rankInput = scan.nextLine();
 		String newRank;
 		switch (rankInput) {
 		case "y":
 			newRank = "admin";
+			System.out.println("Well you better go catch it then!");
 			break;
 		case "n":
-			newRank = "customer";
+			newRank = "client";
+			System.out.println("Oh");
 			break;
 		default:
-			System.out.println("dont mess with me");
+			System.out.println("That's not funny");
 			return new LoginPrompt();
 		}
 		

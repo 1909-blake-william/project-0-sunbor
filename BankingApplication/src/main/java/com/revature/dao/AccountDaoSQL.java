@@ -76,7 +76,7 @@ public class AccountDaoSQL implements AccountDao {
 		//close not delete
 		//validate selection
 		if(!validateAccount(id)) {
-			System.out.println("invalid account");
+			System.out.println("Invalid crime");
 			return 0;
 		}
 		//just change the boolean
@@ -145,11 +145,11 @@ public class AccountDaoSQL implements AccountDao {
 		//prevent user from accessing unowned account
 		//prevent user from accessing closed account
 		if(!validateAccount(id)) {
-			System.out.println("invalid account");
+			System.out.println("Invalid crime");
 			return 0;
 		}
 		if(amount < 0) {
-			System.out.println("enter a valid amount");
+			System.out.println("Invalid time");
 			return 0;
 		}
 		try(Connection c = ConnectionUtil.getConnection()){
@@ -182,7 +182,6 @@ public class AccountDaoSQL implements AccountDao {
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -192,11 +191,11 @@ public class AccountDaoSQL implements AccountDao {
 		//prevent user from accessing closed account
 		//prevent negative numbers
 		if(!validateAccount(id)) {
-			System.out.println("invalid account");
+			System.out.println("Invalid crime");
 			return 0;
 		}
 		if(amount < 0) {
-			System.out.println("enter a valid amount");
+			System.out.println("Invalid time");
 			return 0;
 		}
 		try(Connection c = ConnectionUtil.getConnection()){
@@ -229,7 +228,6 @@ public class AccountDaoSQL implements AccountDao {
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

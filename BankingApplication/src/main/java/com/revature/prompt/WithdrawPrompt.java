@@ -19,7 +19,7 @@ public class WithdrawPrompt implements Prompt {
 		//check if id and amount are valid numbers
 		//call deposit method
 
-		System.out.println("input id of account to withdraw from");
+		System.out.println("Input the id of the crime to reduce your sentence for");
 		accountDao.viewOwned();
 		int id = 0;
 		if(scan.hasNextInt()) {
@@ -27,29 +27,29 @@ public class WithdrawPrompt implements Prompt {
 			scan.nextLine();
 		}
 		else {
-			System.out.println("enter a valid id");
+			System.out.println("This is bad behavior and will cancel out your reward");
 			return new MainMenuPrompt();
 		}
 		
-		System.out.println("input amount to withdraw");
+		System.out.println("Input the number of months to reduce your sentence by");
 		double amount = 0;
 		if(scan.hasNextDouble()) {
 			amount = scan.nextDouble();
 			scan.nextLine();
 		}
 		else {
-			System.out.println("enter a valid amount");
+			System.out.println("This is bad behavior and will cancel out your reward");
 			return new MainMenuPrompt();
 		}
 		
 		int numUpdated = accountDao.withdraw(id, amount);
 		if(numUpdated != 0) {
-			System.out.println("withdrew " + amount + " from " + accountDao.viewOne(id).getAccountName());
+			System.out.println("Reduced your sentence for " + accountDao.viewOne(id).getAccountName() + " by " + amount + "months");
 
 			transactionDao.addTransaction(id, -amount);
 		}
 		else {
-			System.out.println("withdraw failed");
+			System.out.println("This is bad behavior and will cancel out your reward");
 		}
 
 		//TODO possibly close account if balance goes below 0

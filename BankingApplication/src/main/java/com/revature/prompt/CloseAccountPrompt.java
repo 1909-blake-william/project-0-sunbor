@@ -15,7 +15,7 @@ public class CloseAccountPrompt implements Prompt {
 		//get id of account to close
 		//make sure user input is integer
 		//call close account
-		System.out.println("enter id of account to close");
+		System.out.println("Enter id of crime to pardon");
 		accountDao.viewOwned();
 		int id = 0;
 		if(scan.hasNextInt()) {
@@ -24,15 +24,15 @@ public class CloseAccountPrompt implements Prompt {
 		}
 		else {
 			//if invalid, go back to main menu
-			System.out.println("enter a valid id");
+			System.out.println("Enter a valid number");
 			return new MainMenuPrompt();
 		}
 		int numUpdated = accountDao.remove(id);
 		if(numUpdated != 0) {
-			System.out.println(accountDao.viewOne(id).getAccountName() + " closed");
+			System.out.println("You are pardoned for " + accountDao.viewOne(id).getAccountName());
 		}
 		else {
-			System.out.println("account failed to close");
+			System.out.println("Go back to your cell");
 		}
 		
 		return new MainMenuPrompt();

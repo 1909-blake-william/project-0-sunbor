@@ -1,5 +1,5 @@
 package com.revature.util;
 
 public class Constants {
-	public static final int maxTextLength = 20;
+	public static final int maxTextLength = 100;
 }

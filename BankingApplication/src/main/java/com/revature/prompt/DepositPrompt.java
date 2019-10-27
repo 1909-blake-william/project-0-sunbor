@@ -20,7 +20,7 @@ public class DepositPrompt implements Prompt {
 		//call deposit method
 		//update transaction history
 
-		System.out.println("input id of account to deposit in");
+		System.out.println("Input the id of the crime to increase your sentence for");
 		accountDao.viewOwned();
 		
 		int id = 0;
@@ -29,28 +29,28 @@ public class DepositPrompt implements Prompt {
 			scan.nextLine();
 		}
 		else {
-			System.out.println("enter a valid id");
+			System.out.println("Nice try");
 			return new MainMenuPrompt();
 		}
 		
-		System.out.println("input amount to deposit");
+		System.out.println("Input the number of months to increase your sentence by");
 		double amount = 0;
 		if(scan.hasNextDouble()) {
 			amount = scan.nextDouble();
 			scan.nextLine();
 		}
 		else {
-			System.out.println("enter a valid amount");
+			System.out.println("You won't get off this easily");
 			return new MainMenuPrompt();
 		}
 		
 		int numUpdated = accountDao.deposit(id, amount);
 		if(numUpdated != 0) {
-			System.out.println("deposited " + amount + " into " + accountDao.viewOne(id).getAccountName());
+			System.out.println("Increased your sentence for " + accountDao.viewOne(id).getAccountName() + " by " + amount + "months");
 			transactionDao.addTransaction(id, amount);
 		}
 		else {
-			System.out.println("deposit failed");
+			System.out.println("You have successfully escaped punishment");
 		}
 
 		return new MainMenuPrompt();

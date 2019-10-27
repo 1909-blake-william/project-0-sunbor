@@ -82,7 +82,10 @@ public class User implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + "]";
+		String clownRole = "Inmate";
+		if(role.equals("admin"))
+			clownRole = "Warden";
+		return "Inmate [id: " + id + ", Name: " + username + ", Role: " + clownRole + "]";
 	}
 	
 

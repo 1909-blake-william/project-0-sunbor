@@ -80,8 +80,8 @@ public class Transaction {
 	}
 	@Override
 	public String toString() {
-		return "Transaction [id=" + id + ", account=" + account + ", amount=" + amount + ", timestamp=" + timestamp
-				+ "]";
+		return "Behavior record [id: " + id + ", Crime: " + account.getAccountName() + ", Sentence increased or reduced by: " + amount + " months, "
+				+ "Behavior occurred: " + timestamp + "]";
 	}
 
 	

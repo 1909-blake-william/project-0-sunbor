@@ -13,7 +13,7 @@ public class DepositPrompt implements Prompt {
 	
 	@Override
 	public Prompt run() {
-		//display owned accounts
+		//TODO maybe display owned accounts
 		//get id of account to deposit in
 		//get amount to deposit
 		//check if id and amount are valid numbers
@@ -21,7 +21,6 @@ public class DepositPrompt implements Prompt {
 		//update transaction history
 
 		System.out.println("Input the id of the crime to increase your sentence for");
-		accountDao.viewOwned();
 		
 		int id = 0;
 		if(scan.hasNextInt()) {

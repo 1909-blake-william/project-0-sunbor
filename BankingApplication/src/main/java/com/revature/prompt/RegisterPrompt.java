@@ -17,7 +17,7 @@ public class RegisterPrompt implements Prompt {
 		System.out.println("Enter your new clown name");
 		String newName = scan.nextLine();
 		//check to see that size is not over limit
-		if(newName.length() > Constants.maxTextLength) {
+		if(newName.length() > Constants.MAX_TEXT_LENGTH) {
 			System.out.println("Get a nickname");
 			return new LoginPrompt();
 		}
@@ -32,7 +32,7 @@ public class RegisterPrompt implements Prompt {
 		//get password
 		System.out.println("Enter new password"); 
 		String newPass = scan.nextLine();
-		if(newPass.length() > Constants.maxTextLength) {
+		if(newPass.length() > Constants.MAX_TEXT_LENGTH) {
 			System.out.println("No need to be so paranoid");
 			return new LoginPrompt();
 		}
@@ -44,11 +44,11 @@ public class RegisterPrompt implements Prompt {
 		switch (rankInput) {
 		case "y":
 			newRank = "admin";
-			System.out.println("Well you better go catch it then!");
+			System.out.println("Well you better go catch it then");
 			break;
 		case "n":
 			newRank = "client";
-			System.out.println("Oh");
+			System.out.println("click");
 			break;
 		default:
 			System.out.println("That's not funny");

@@ -66,7 +66,7 @@ public class MainMenuPrompt implements Prompt {
 			//view accounts
 			List<Account> accountList1 = accountDao.viewOwned();
 			if(accountList1.size() == 0) {
-				System.out.println("No crimes committed");
+				System.out.println("Get out of here you goody small shoes");
 			}
 			for(Account a : accountList1) {
 				System.out.println(a);

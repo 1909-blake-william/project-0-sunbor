@@ -1,9 +1,11 @@
 package com.revature.prompt;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.revature.dao.AccountDao;
 import com.revature.dao.TransactionDao;
+import com.revature.model.Account;
 
 public class DepositPrompt implements Prompt {
 
@@ -13,7 +15,15 @@ public class DepositPrompt implements Prompt {
 	
 	@Override
 	public Prompt run() {
-		//TODO maybe display owned accounts
+		// maybe display owned accounts
+		List<Account> ownedList = accountDao.viewOwned();
+		if(ownedList.size() == 0) {
+			System.out.println("Get out of here you goody small shoes");
+			return new MainMenuPrompt();
+		}
+		for(Account a : ownedList) {
+			System.out.println(a);
+		}
 		//get id of account to deposit in
 		//get amount to deposit
 		//check if id and amount are valid numbers

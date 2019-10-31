@@ -129,7 +129,7 @@ public class UserDaoSQL implements UserDao {
 	public List<User> findAll() {
 		try(Connection c = ConnectionUtil.getConnection()){
 //			log.info("making sql statement");
-			String sql = "SELECT * FROM bank_users";
+			String sql = "SELECT * FROM bank_users ORDER BY user_id";
 //			log.info("making prepared statement");
 			PreparedStatement ps = c.prepareStatement(sql);
 //			log.info("executing statement");

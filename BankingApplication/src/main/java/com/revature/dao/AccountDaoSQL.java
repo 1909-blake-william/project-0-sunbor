@@ -122,7 +122,7 @@ public class AccountDaoSQL implements AccountDao {
 		//get id of current user
 		int currentId = auth.getCurrentUser().getId();
 		try(Connection c = ConnectionUtil.getConnection()){
-			String sql = "SELECT * FROM bank_accounts WHERE owner_id = ?";
+			String sql = "SELECT * FROM bank_accounts WHERE owner_id = ? ORDER BY account_id";
 			PreparedStatement ps = c.prepareStatement(sql);
 			ps.setInt(1, currentId);
 			ResultSet rs = ps.executeQuery();
@@ -234,7 +234,7 @@ public class AccountDaoSQL implements AccountDao {
 	@Override
 	public List<Account> viewAll() {
 		try(Connection c = ConnectionUtil.getConnection()){
-			String sql = "SELECT * FROM bank_accounts";
+			String sql = "SELECT * FROM bank_accounts ORDER BY account_id";
 			PreparedStatement ps = c.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			

@@ -19,7 +19,7 @@ public class AddAccountPrompt implements Prompt {
 		System.out.println("What are you in for?");
 		String accountName = scan.nextLine();
 		//check if too long
-		if(accountName.length() > Constants.maxTextLength) {
+		if(accountName.length() > Constants.MAX_TEXT_LENGTH) {
 			System.out.println("Sorry, I stopped paying attention");
 			return new MainMenuPrompt();
 		}
